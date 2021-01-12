@@ -13,6 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+import { Link as RouterLink } from 'react-router-dom';
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -101,14 +103,15 @@ export default function Jregistro() {
               />
             </Grid>
           </Grid>
+
           <Button
-            type="submit"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
+						component={RouterLink} to="/home"
           >
-            Sign Up
+            Registrarme
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
