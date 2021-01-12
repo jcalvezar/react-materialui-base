@@ -7,6 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 
 import PersonIcon from '@material-ui/icons/Person';
 import LockIcon from '@material-ui/icons/Lock';
@@ -72,6 +73,10 @@ const useStyles = makeStyles((theme) => ({
   barra: {
     padding: 0,
   },
+	olvide: {
+		paddingTop: 12,
+		paddingBottom: 0,
+	}
 }));
 
 
@@ -85,7 +90,7 @@ export default function Barra(props) {
   };
 	
   return (
-			<React.Fragment>
+
 				<AppBar position="sticky">
 					<Container fixed>
 						<Toolbar className={classes.barra}>
@@ -110,6 +115,15 @@ export default function Barra(props) {
 							) : (
 								<React.Fragment>
 								<div className={classes.separador}></div>
+								
+								<Button
+									color="inherit"
+									component={Link} to="/recupero"
+									className={classes.olvide}
+								>
+									Olvidé mi Clave
+								</Button>
+								
 								<div className={classes.search}>
 									<div className={classes.searchIcon}>
 										<PersonIcon />
@@ -147,7 +161,6 @@ export default function Barra(props) {
 						</Toolbar>
 					</Container>
 				</AppBar>
-
-			</React.Fragment>
   );
 }
+

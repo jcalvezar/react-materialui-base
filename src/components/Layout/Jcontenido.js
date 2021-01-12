@@ -11,6 +11,8 @@ import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+import { Link as RouterLink } from 'react-router-dom';
+
 const useStyles = makeStyles((theme) => ({
   '@global': {
     ul: {
@@ -146,7 +148,7 @@ export default function Jcontenido(props) {
                   </ul>
                 </CardContent>
                 <CardActions>
-                  <Button fullWidth variant={tier.buttonVariant} color="primary">
+                  <Button fullWidth variant={tier.buttonVariant} color="primary" component={RouterLink} to="/registro">
                     {tier.buttonText}
                   </Button>
                 </CardActions>
