@@ -86,14 +86,6 @@ function Barra(props) {
 	
 	const { isAuthenticated } = props.auth; 
 	
-	/*
-	const [logueado, setLogueado] = React.useState(false);
-	
-  const handleSalir = () => {
-		setLogueado(false)
-  };
-	*/
-	
   return (
 				<AppBar position="sticky">
 					<Container fixed>

@@ -12,6 +12,9 @@ import PersonIcon from '@material-ui/icons/Person';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
+// Nuevo, para el Store
+import { connect } from 'react-redux';
+
 const StyledMenu = withStyles({
   paper: {
     border: '1px solid #d3d4d5',
@@ -38,7 +41,7 @@ const StyledMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem);
 
-export default function Usermenu(props) {
+function Usermenu(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -51,6 +54,7 @@ export default function Usermenu(props) {
 
   return (
     <div>
+		{ props.user.lastname }, { props.user.firstname }
 		 <IconButton
 				edge="end"
 				aria-label="account of current user"
@@ -84,3 +88,12 @@ export default function Usermenu(props) {
     </div>
   );
 }
+
+function mapStateToProps(state) {
+	//console.log('estado', state);
+  return {
+    user: state.auth.user
+  }
+}
+
+export default connect(mapStateToProps, {})(Usermenu); 
