@@ -28,6 +28,16 @@ export function login(data) {
       localStorage.setItem('jwtToken', token);
       setAuthorizationToken(token);
       dispatch(setCurrentUser(jwtDecode(token)));
-    });
+    }).catch(err => {
+			if (err.response) {
+				// client received an error response (5xx, 4xx)
+				console.log('Respuesta Error: ', err.response);
+				//err.response.data.errors.map( item => console.log(item.msg) );
+			} else if (err.request) {
+				// client never received a response, or request never left
+			} else {
+				// anything else
+			}
+		})
   }
 }

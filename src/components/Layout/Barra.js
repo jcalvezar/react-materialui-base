@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import AppBar from '@material-ui/core/AppBar';
@@ -95,6 +96,7 @@ function Barra(props) {
 								className={classes.menuButton}
 								color="inherit"
 								aria-label="open drawer"
+								component={RouterLink} to="/home"
 							>
 								<DriveEtaIcon fontSize="large" />
 							</IconButton>
