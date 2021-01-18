@@ -4,17 +4,18 @@ import Container from '@material-ui/core/Container';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button';
-import InputBase from '@material-ui/core/InputBase';
-import { fade, makeStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
 
-import PersonIcon from '@material-ui/icons/Person';
-import LockIcon from '@material-ui/icons/Lock';
+import { fade, makeStyles } from '@material-ui/core/styles';
+
 import DriveEtaIcon from '@material-ui/icons/DriveEta';
 
+import Jlogin from './Jlogin';
 import Jmenu from './Jmenu';
 import Usermenu from './Usermenu';
+
+// Cosas Nuevas
+import { connect } from 'react-redux';
+import { login, logout } from '../../actions/authActions';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -80,17 +81,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function Barra(props) {
+function Barra(props) {
 	const classes = useStyles();
 	
+	const { isAuthenticated } = props.auth; 
+	
+	/*
 	const [logueado, setLogueado] = React.useState(false);
 	
   const handleSalir = () => {
 		setLogueado(false)
   };
+	*/
 	
   return (
-
 				<AppBar position="sticky">
 					<Container fixed>
 						<Toolbar className={classes.barra}>
@@ -106,56 +110,16 @@ export default function Barra(props) {
 								{props.appname}
 							</Typography>
 							
-							{logueado ? (
+							{isAuthenticated ? (
 								<React.Fragment>
 									 <Jmenu />
 									 <div className={classes.separador}></div>
-									 <Usermenu onSalir={handleSalir} />
+									 <Usermenu onSalir={props.logout} />
 								</React.Fragment>
 							) : (
 								<React.Fragment>
-								<div className={classes.separador}></div>
-								
-								<Button
-									color="inherit"
-									component={Link} to="/recupero"
-									className={classes.olvide}
-								>
-									Olvidé mi Clave
-								</Button>
-								
-								<div className={classes.search}>
-									<div className={classes.searchIcon}>
-										<PersonIcon />
-									</div>
-									<InputBase
-										placeholder="Usuario"
-										classes={{
-											root: classes.inputRoot,
-											input: classes.inputInput,
-										}}
-										inputProps={{ 'aria-label': 'usuario' }}
-									/>
-								</div>
-								<div className={classes.search}>
-									<div className={classes.searchIcon}>
-										<LockIcon />
-									</div>
-									<InputBase
-										placeholder="Clave"
-										classes={{
-											root: classes.inputRoot,
-											input: classes.inputInput,
-										}}
-										inputProps={{ 'aria-label': 'clave' }}
-										type="password"
-									/>
-								</div>
-								<div className={classes.search}>
-									<Button variant="contained" color="secondary" onClick={(event) => setLogueado(true)}>
-										Ingresar
-									</Button>
-								</div>
+									<div className={classes.separador}></div>
+									<Jlogin onClick={props.login}/>
 								</React.Fragment>
 							)}
 						</Toolbar>
@@ -164,3 +128,10 @@ export default function Barra(props) {
   );
 }
 
+function mapStateToProps(state) {
+  return {
+    auth: state.auth
+  }
+}
+
+export default connect(mapStateToProps, { login, logout })(Barra); 
